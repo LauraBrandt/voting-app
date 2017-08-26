@@ -1,0 +1,39 @@
+.navbar {
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: #306c9b;
+    font-family: Lato, sans-serif;
+}
+
+#navbar li {
+    font-size: 1.1em;
+}
+
+#navbar a {
+    color: #fff;
+}
+
+#navbar a:hover {
+    background-color: #4b83ad;
+}
+
+#navbar .active {
+    background-color: #16598d;
+}
+
+#navbar .dropdown-toggle {
+    margin-left: -10px;
+    padding-left: 50%;
+}
+
+#navbar .dropdown-menu:hover {
+    background-color: #ccc;
+}
+
+#navbar .dropdown-menu a {
+    color: black;
+}
+
+#navbar .dropdown-menu a:hover {
+    background-color: inherit;
+}

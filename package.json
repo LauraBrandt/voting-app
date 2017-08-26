@@ -1,0 +1,31 @@
+{
+  "name": "PollPlace",
+  "version": "1.0.0",
+  "description": "An app where you can create polls and vote on other users' polls",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LauraBrandt/voting-app"
+  },
+  "private": true,
+  "bugs": "https://github.com/LauraBrandt/voting-app/issues",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Laura Brandt",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "express": "^4.12.4",
+    "express-session": "^1.11.3",
+    "mongoose": "^4.1.0",
+    "morgan": "^1.8.2",
+    "passport": "^0.3.0",
+    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.0.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-google-oauth2": "^0.1.6",
+    "passport-twitter": "^1.0.4",
+    "pug": "^2.0.0-rc.3"
+  }
+}

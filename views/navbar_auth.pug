@@ -1,0 +1,20 @@
+nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      a.navbar-brand(href='/' class=page=='home' ? 'active' : '') PollPlace
+    ul.nav.navbar-nav
+      li
+        a(href='/allpolls' class=page=='allpolls' ? 'active' : '') All Polls
+    ul.nav.navbar-nav.navbar-right
+      li
+        a(href='/createpoll' class=page=='createpoll' ? 'active' : '') Create Poll
+      li
+        a(href='/mypolls' class=page=='mypolls' ? 'active' : '') My Polls
+      li
+        a(href='/dashboard' class=page=='dashboard' ? 'active' : '')= user.displayName
+      li.dropdown
+        a.dropdown-toggle(data-toggle="dropdown" href="#")
+          span.caret
+        ul.dropdown-menu
+          li
+            a(href="/logout") Logout

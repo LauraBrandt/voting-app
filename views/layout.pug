@@ -1,0 +1,21 @@
+doctype
+html(lang='en')
+  head
+    meta(charset="utf-8")
+    title= title + ' | PollPlace'
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel='stylesheet', href='/public/css/main.css')
+    link(rel='stylesheet', href='/public/css/navbar.css')
+    link(href="https://fonts.googleapis.com/css?family=Roboto|Lato|Raleway|Oswald" rel="stylesheet")
+    //family=Lato|Muli:400,600,800|Roboto:400,700|Roboto+Slab
+  body
+    #navbar
+        if auth 
+            include navbar_auth.pug
+        else
+            include navbar_unauth.pug
+    #content    
+        block content
