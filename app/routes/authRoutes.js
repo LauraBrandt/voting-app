@@ -5,7 +5,7 @@ module.exports = function (app, passport) {
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/dashboard',
+            successRedirect : '/',
             failureRedirect : '/login'
         }));
 
@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
 
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
-            successRedirect : '/dashboard',
+            successRedirect : '/',
             failureRedirect : '/login'
         }));
 
@@ -21,7 +21,7 @@ module.exports = function (app, passport) {
 
     app.get('/auth/google/callback',
         passport.authenticate('google', {
-                successRedirect : '/dashboard',
+                successRedirect : '/',
                 failureRedirect : '/login'
         }));
         

@@ -1,6 +1,11 @@
 'use strict';
 
+var PollHandler = require(process.cwd() + '/app/controllers/pollController.server.js');
+
 module.exports = function (app, passport) {
+	
+    var pollHandler = new PollHandler();
+    
 	app.get('/', function (req, res) {
 		res.render('home', 
 			{
@@ -41,24 +46,44 @@ module.exports = function (app, passport) {
 			});
 	});
 	
-	app.get('/createpoll', isLoggedIn, function (req, res) {
-		res.render('create-poll', 
-			{
-				auth: true,
-				user: req.user,
-				title: 'Create a Poll',
-				page: 'createpoll'
-			});
-	});
-	
-	app.get('/dashboard', isLoggedIn, function (req, res) {
-		res.render('dashboard', 
-			{
-				auth: true,
-				user: req.user,
-				title: 'Dashboard',
-				page: 'dashboard'
-			});
+	app.route('/createpoll')
+		.get(isLoggedIn, function (req, res) {
+			res.render('create-poll', 
+				{
+					auth: true,
+					user: req.user,
+					title: 'Create a Poll',
+					page: 'createpoll'
+				});
+		
+		})
+		.post(isLoggedIn, function(req, res) {
+	    	pollHandler.addPoll(req, function(poll) {
+	    		 res.render('create-poll-success', 
+	    			{
+	    				auth: true,
+	    				user: req.user,
+	    				title: 'Create a Poll',
+	    				page: 'createpoll',
+	    				pollUrl: poll.url,
+	    				baseUrl: req.headers.host
+	    			});
+	    	});
+    	});
+
+	app.get('/polls/:pollurl', function (req, res) {
+		var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
+		pollHandler.getPoll(pollid, function(poll) {
+			res.render('view-poll', 
+				{
+					auth: req.isAuthenticated(),
+					user: req.user,
+					title: '',
+					page: '',
+					poll: poll
+				});
+		});
+		
 	});
 	
 	function isLoggedIn (req, res, next) {

@@ -4,16 +4,19 @@ var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
-var morgan       = require('morgan');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
 
 var pageRoutes = require('./app/routes/pageRoutes.js');
 var authRoutes = require('./app/routes/authRoutes.js');
-var apiRoutes = require('./app/routes/apiRoutes.js');
 
 var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
 app.use(morgan('dev'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
@@ -36,8 +39,6 @@ app.use(passport.session());
 
 pageRoutes(app, passport);
 authRoutes(app, passport);
-apiRoutes(app, passport);
-
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
