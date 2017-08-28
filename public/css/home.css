@@ -1,0 +1,30 @@
+.jumbotron {
+	background-color: #77a7cb;
+	font-family: 'Open Sans', sans-serif;
+}
+.jumbotron h1 {
+	font-family: 'Baloo Bhaijaan', cursive;
+	margin-top: 0;
+}
+
+.jumbotron .description {
+	margin: 2.5% auto 1% auto;
+}
+
+.jumbotron .fa {
+	padding-right: 10px;
+}
+
+.jumbotron .actions .btn {
+    margin: 2.5% 5% 1% 5%;
+    text-align: left;
+}
+
+.jumbotron .signins .btn {
+    margin: 2% 2% 0 2%;
+    text-align: left;
+}
+
+.examplepolls {
+	margin: 3% 5%;
+}

@@ -1,3 +1,19 @@
 extend layout
+block head
+    link(rel='stylesheet', href='/public/css/create-poll.css')
 block content
-    p Create Poll
+    h2 New Poll
+    form.newPollForm(method='post' action='/createpoll')
+        .form-group.questionForm
+            label(for="question") Write your question:
+            input.form-control#question(type="text" name='question' required)
+        .form-group.answersForm
+            label(for="answers") Options:
+            input.form-control.answers(type="text" name="answers" required)
+            input.form-control.answers(type="text" name="answers" required)
+        button.btn.btn-default.addOption(type="button")
+            span.fa.fa-plus 
+            | Add option
+        button.btn.btn-primary.submit(type="submit") Create Poll!
+
+    script(type="text/javascript" src="controllers/controller.client.js")

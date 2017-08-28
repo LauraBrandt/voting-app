@@ -1,5 +1,42 @@
 extend layout
+block head
+    link(rel='stylesheet', href='/public/css/home.css')
 block content
-    p Hello World
+    .jumbotron.text-center
+            h1 PollPlace
+            .row.description
+                .col-sm-4
+                    p 
+                        span.fa.fa-check
+                        | Create your own custom polls.
+                .col-sm-4
+                    p 
+                        span.fa.fa-check
+                        | Vote on user-created polls.
+                .col-sm-4
+                    p 
+                        span.fa.fa-check
+                        | View live results of all polls.   
+            if auth
+                .actions
+                        a.btn.btn-default.btn-lg(href="/createpoll")
+                            span.fa.fa-plus 
+                            | Make a New Poll
+                        a.btn.btn-default.btn-lg(href="/mypolls")
+                            span.fa.fa-list 
+                            | View Your Polls
+            else
+                .signins
+                    a.btn.btn-primary(href="/auth/facebook")
+                        span.fa.fa-facebook 
+                        | Login with Facebook
+                    a.btn.btn-info(href="/auth/twitter")
+                        span.fa.fa-twitter 
+                        | Login with Twitter
+                    a.btn.btn-danger(href="/auth/google")
+                        span.fa.fa-google
+                        | Login with Google
+    .examplepolls
+        h3 Check out some of the polls other users have made:
 
 

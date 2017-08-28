@@ -1,8 +1,9 @@
 .navbar {
     padding-left: 2%;
     padding-right: 2%;
-    background-color: #306c9b;
+    background-color: #16598D;/*#306c9b*/;
     font-family: Lato, sans-serif;
+    margin: 0;
 }
 
 #navbar li {
@@ -10,30 +11,30 @@
 }
 
 #navbar a {
-    color: #fff;
+    color: #d3e7f6;
 }
 
 #navbar a:hover {
-    background-color: #4b83ad;
+    color: #fff;
+}
+
+#navbar .login a {
+    font-weight: 700;
 }
 
 #navbar .active {
-    background-color: #16598d;
+    background-color: #0C436D;
 }
 
-#navbar .dropdown-toggle {
-    margin-left: -10px;
-    padding-left: 50%;
+#navbar .fa {
+    padding-right: 0.4em;
 }
 
-#navbar .dropdown-menu:hover {
-    background-color: #ccc;
+#navbar .dropdown a:focus {
+    background-color: inherit;
+    /*background-color: #4b83ad;*/
 }
 
 #navbar .dropdown-menu a {
     color: black;
-}
-
-#navbar .dropdown-menu a:hover {
-    background-color: inherit;
 }

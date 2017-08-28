@@ -9,13 +9,15 @@ html(lang='en')
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
     link(rel='stylesheet', href='/public/css/main.css')
     link(rel='stylesheet', href='/public/css/navbar.css')
-    link(href="https://fonts.googleapis.com/css?family=Roboto|Lato|Raleway|Oswald" rel="stylesheet")
-    //family=Lato|Muli:400,600,800|Roboto:400,700|Roboto+Slab
+    link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Baloo+Bhaijaan|Roboto|Open+Sans" rel="stylesheet")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    block head
   body
     #navbar
         if auth 
             include navbar_auth.pug
         else
             include navbar_unauth.pug
-    #content    
-        block content
+    .container
+        #content    
+            block content

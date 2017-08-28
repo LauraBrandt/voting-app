@@ -1,3 +1,19 @@
 extend layout
+block head
+    link(rel='stylesheet', href='/public/css/view-poll.css')
 block content
-    p= pollname
+    h1= poll.question
+    p.author Created by #{poll.creator.displayName}
+    .row
+    .col-sm-3
+    .col-sm-6
+        form
+            ul.list-group.form-group.options
+                for ans in poll.answers
+                    li.list-group-item.radio
+                        label
+                            input(type='radio' name='answer' value=ans)
+                            span #{ans}
+            button.btn.btn-primary.submitButton(type="submit") Vote!
+            button.btn.btn-default.resultsButton(type="button") View Results
+    .col-sm-3

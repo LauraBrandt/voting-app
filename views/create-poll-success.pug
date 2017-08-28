@@ -1,0 +1,9 @@
+extend layout
+block head
+    link(rel='stylesheet', href='/public/css/create-poll.css')
+block content
+    h2 New Poll
+    .successMessage.well.well-lg
+        p.p1 Your poll was successfully created!
+        p.p2 You can find it at:
+        a(href=pollUrl)= baseUrl + pollUrl

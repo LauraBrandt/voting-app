@@ -1,12 +1,24 @@
 extend layout
+block head
+    link(rel='stylesheet', href='/public/css/login.css')
 block content
-    h3 Login with one of the following accounts:
-    a.btn.btn-primary(href="/auth/facebook")
-        span.fa.fa-facebook 
-        | Facebook
-    a.btn.btn-info(href="/auth/twitter")
-        span.fa.fa-twitter 
-        | Twitter
-    a.btn.btn-danger(href="/auth/google")
-        span.fa.fa-google
-        | Google
+    h3 Sign in with one of the following accounts:
+    .signins
+        a.btn.btn-primary(href="/auth/facebook")
+            span.fa.fa-facebook 
+            | Login with Facebook
+        a.btn.btn-info(href="/auth/twitter")
+            span.fa.fa-twitter 
+            | Login with Twitter
+        a.btn.btn-danger(href="/auth/google")
+            span.fa.fa-google
+            | Login with Google
+    .getaccount
+        p Don't have one of these accounts? Sign up:
+        ul
+            li 
+                a(href='https://www.facebook.com/') Get a Facebook account
+            li 
+                a(href='https://twitter.com/') Get a Twitter account
+            li 
+                a(href='https://accounts.google.com/SignUp') Get a Google account

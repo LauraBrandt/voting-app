@@ -4,16 +4,18 @@ nav.navbar.navbar-default
       a.navbar-brand(href='/' class=page=='home' ? 'active' : '') PollPlace
     ul.nav.navbar-nav
       li
-        a(href='/allpolls' class=page=='allpolls' ? 'active' : '') All Polls
+        a(href='/allpolls' class=page=='allpolls' ? 'active' : '')
+          span.fa.fa-pencil-square-o  
+          | All Polls
     ul.nav.navbar-nav.navbar-right
       li
         a(href='/createpoll' class=page=='createpoll' ? 'active' : '') Create Poll
       li
         a(href='/mypolls' class=page=='mypolls' ? 'active' : '') My Polls
-      li
-        a(href='/dashboard' class=page=='dashboard' ? 'active' : '')= user.displayName
       li.dropdown
-        a.dropdown-toggle(data-toggle="dropdown" href="#")
+        a(href='#' data-toggle='dropdown')
+          span.fa.fa-user
+          | #{user.displayName} 
           span.caret
         ul.dropdown-menu
           li
