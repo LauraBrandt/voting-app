@@ -5,15 +5,17 @@ var Polls = require('../models/polls.js');
 
 function PollHandler () {
     
-    this.addPoll = function(req, callback) {
+    this.addPoll = function(userid, body, callback) {
+        console.log(userid);
+        console.log(JSON.stringify(body));
         Users
-            .findOne({oauthID : req.user.oauthID})
+            .findOne({oauthID : userid})
             .exec(function(err, user) {
                 if (err) { throw err; }
                 
                 var newPoll = new Polls({
-                    question: req.body.question,
-                    answers : req.body.answers,
+                    question: body.question,
+                    answers : body.answers,
                     creator : user._id
                 });
                 
@@ -36,6 +38,15 @@ function PollHandler () {
 			});
 	};
 	
+	this.deletePoll = function(pollid, callback) {
+	    Polls
+	        .findByIdAndRemove(pollid)
+			.exec(function (err, poll) {
+				if (err) { throw err; }
+
+				callback(poll);
+			});
+	};
 }
 
 module.exports = PollHandler;

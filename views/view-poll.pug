@@ -7,13 +7,20 @@ block content
     .row
     .col-sm-3
     .col-sm-6
-        form
+        form(method='post' action='/voted/' + poll._id)
             ul.list-group.form-group.options
                 for ans in poll.answers
                     li.list-group-item.radio
                         label
                             input(type='radio' name='answer' value=ans)
                             span #{ans}
+                if auth
+                    li.list-group-item.newAnswer
+                        button.addUserOption(type='button')
+                            span.fa.fa-plus-square-o  
+                            | Add new option...
             button.btn.btn-primary.submitButton(type="submit") Vote!
             button.btn.btn-default.resultsButton(type="button") View Results
     .col-sm-3
+    
+    script(type="text/javascript" src="../controllers/controller.client.js")

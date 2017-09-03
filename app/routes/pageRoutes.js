@@ -58,7 +58,7 @@ module.exports = function (app, passport) {
 		
 		})
 		.post(isLoggedIn, function(req, res) {
-	    	pollHandler.addPoll(req, function(poll) {
+	    	pollHandler.addPoll(req.user.oauthID, req.body, function(poll) {
 	    		 res.render('create-poll-success', 
 	    			{
 	    				auth: true,
@@ -78,12 +78,18 @@ module.exports = function (app, passport) {
 				{
 					auth: req.isAuthenticated(),
 					user: req.user,
-					title: '',
+					title: poll.question,
 					page: '',
 					poll: poll
 				});
 		});
 		
+	});
+	
+	app.post('/voted/:pollID', function (req, res) {
+		/*add poll answer to poll results, then redirect to results view*/
+		res.write('You voted!');
+		res.end(JSON.stringify(req.body));
 	});
 	
 	function isLoggedIn (req, res, next) {
