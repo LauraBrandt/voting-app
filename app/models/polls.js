@@ -12,7 +12,8 @@ var PollSchema = new Schema({
 PollSchema
     .virtual('url')
     .get(function () {
-        return '/polls/' + this.id + '-' + this.question;
+        var questionNoSpaces = this.question.replace(/\s/g, "-");
+        return '/polls/' + this.id + '-' + questionNoSpaces;
     });
     
 PollSchema
