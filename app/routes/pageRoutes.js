@@ -37,13 +37,16 @@ module.exports = function (app, passport) {
     });
 	
 	app.get('/mypolls', isLoggedIn, function (req, res) {
-		res.render('my-polls', 
-			{
-				auth: true,
-				user: req.user,
-				title: 'My Polls',
-				page: 'mypolls'
-			});
+		pollHandler.getUserPolls(req.user.oauthID, function(polls) {
+	    		 res.render('my-polls',
+	    			{
+	    				auth: true,
+	    				user: req.user,
+	    				title: 'My Polls',
+	    				page: 'mypolls',
+	    				polls: polls
+	    			});
+	    	});
 	});
 	
 	app.route('/createpoll')
@@ -92,6 +95,18 @@ module.exports = function (app, passport) {
 		res.end(JSON.stringify(req.body));
 	});
 	
+	app.route('/api/:pollid')
+		.get(function(req, res) {
+			pollHandler.getPoll(req.params.pollid, function(poll) {
+				res.send(poll);
+			});
+		})
+		.delete(function(req, res) {
+			pollHandler.deletePoll(req.params.pollid, function(poll) {
+				res.send('/mypolls');
+			});
+		});
+	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
 			return next();
@@ -99,4 +114,5 @@ module.exports = function (app, passport) {
 			res.redirect('/login');
 		}
 	}
+	
 };

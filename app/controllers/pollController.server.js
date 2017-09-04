@@ -38,6 +38,18 @@ function PollHandler () {
 			});
 	};
 	
+	this.getUserPolls = function(userid, callback) {
+	    Users.findOne({oauthID: userid}).exec(function(err, user) {
+	        if (err) { throw err; }
+	        
+	        Polls.find({ creator: user._id }).exec(function(err, polls) {
+	            if (err) { throw err; }
+
+				callback(polls);
+	        });
+	    });
+	};
+	
 	this.deletePoll = function(pollid, callback) {
 	    Polls
 	        .findByIdAndRemove(pollid)

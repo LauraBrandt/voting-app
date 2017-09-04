@@ -2,6 +2,7 @@
 
 (function () {
     //console.log('in the controller!!');
+    var apiUrl = window.location.origin + '/api/';
     
     var newOptionButton = document.querySelector('.addOption');
     var answersForm = document.querySelector('.answersForm');
@@ -19,7 +20,6 @@
     }
     
     var newUserOptionButton = document.querySelector('.addUserOption');
-    var answersList = document.querySelector('.list-group');
     
     if (newUserOptionButton) {
         newUserOptionButton.addEventListener('click', function () {
@@ -59,6 +59,25 @@
                 newElemRadio.setAttribute("value", newOptionText.value);
             });
         }, false);
+    }
+    
+    var deleteButtons = document.querySelectorAll(".delete");
+    
+    if (deleteButtons) {
+        for (var i=0;i<deleteButtons.length;i++){
+            deleteButtons[i].addEventListener("click", function() {
+                ajaxFunctions.ajaxRequest('GET', apiUrl+this.id, function (data) {
+                    var poll = JSON.parse(data);
+                    var message = "Are you sure you want to delete the poll '" + poll.question + "'?";
+                    if (confirm(message) == true) {
+                        ajaxFunctions.ajaxRequest('DELETE', apiUrl+poll._id, function(data) {
+                            window.location=data;
+                        });
+                    }
+                    
+                });
+            });
+        }
     }
     
 })();
