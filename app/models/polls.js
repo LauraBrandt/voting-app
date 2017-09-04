@@ -13,7 +13,7 @@ PollSchema
     .virtual('url')
     .get(function () {
         var questionNoSpaces = this.question.replace(/\s/g, "-");
-        return '/polls/' + this.id + '-' + questionNoSpaces;
+        return this.id + '-' + questionNoSpaces;
     });
     
 PollSchema

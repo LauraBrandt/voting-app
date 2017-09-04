@@ -1,6 +1,6 @@
 extend layout
 block head
-    link(rel='stylesheet', href='/public/css/results.css')
+    link(rel='stylesheet', href='/public/css/view-results.css')
 block content
     h1= poll.question
     p.author Created by #{poll.creator.displayName}
@@ -8,4 +8,7 @@ block content
     .row
         .col-sm-3
         .col-sm-6
+            ul
+                each votes, answer in poll.answersObject
+                    li= answer + ': ' + votes
         .col-sm-3

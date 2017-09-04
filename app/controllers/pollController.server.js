@@ -25,6 +25,8 @@ function PollHandler () {
                 
                 newPoll.save(function(err, poll) {
                     if (err) { throw err; }
+                    
+                    console.log("in add poll, poll is", poll);
 	                callback(poll);
                 });
             });
@@ -70,7 +72,14 @@ function PollHandler () {
 			.exec(function(err, poll) {
 				if (err) { throw err; }
 				
-				poll.answersObject[body.answer] += 1;
+				console.log("in update poll, poll is", poll);
+				console.log("in update poll, answersObject[body.answer] is", poll.answersObject[body.answer]);
+				if (poll.answersObject[body.answer] >= 0 ) {
+					poll.answersObject[body.answer] += 1;
+				} else {
+					poll.answersObject[body.answer] = 1;
+				}
+				
 				poll.markModified('answersObject');
 				
 				poll.save(function(err, poll) {

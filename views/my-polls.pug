@@ -16,7 +16,7 @@ block content
             ul.allpolls.list-group
                 each poll in polls   
                     li.list-group-item.row(id=poll._id)
-                        a.btn.col-xs-11.pollLink(href=poll.url)= poll.question
+                        a.btn.col-xs-11.pollLink(href='/polls/'+poll.url)= poll.question
                         .col-xs-1
                             .btn.btn-default.delete(id=poll._id)
                                 span.fa.fa-trash.text-danger(data-toggle="tooltip" title="Delete poll")

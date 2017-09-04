@@ -68,8 +68,8 @@ module.exports = function (app, passport) {
 	    				user: req.user,
 	    				title: 'Create a Poll',
 	    				page: 'createpoll',
-	    				pollUrl: poll.url,
-	    				baseUrl: req.headers.host
+	    				baseUrl: req.headers.host,
+	    				url: '/polls/' + poll.url
 	    			});
 	    	});
     	});
@@ -91,17 +91,23 @@ module.exports = function (app, passport) {
 		.post(function (req, res) {
 			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
 			pollHandler.updatePollResults(pollid, req.body, function(poll) {
-				res.render('results', 
-					{
-						auth: req.isAuthenticated(),
-						user: req.user,
-						title: poll.question,
-						page: '',
-						poll: poll
-					});
+				res.redirect('/results/'+poll.url);
 			});
-			/*add poll answer to poll results, then redirect to results view*/
 		});
+
+	app.get('/results/:pollurl', function (req, res) {
+		var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
+		pollHandler.getPoll(pollid, function(poll) {
+			res.render('view-results', 
+				{
+					auth: req.isAuthenticated(),
+					user: req.user,
+					title: poll.question,
+					page: '',
+					poll: poll
+				});
+		});
+	});
 
 	app.route('/api/:pollid')
 		.get(function(req, res) {

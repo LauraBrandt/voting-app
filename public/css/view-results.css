@@ -1,0 +1,13 @@
+#content {
+    margin: 4% 10%;
+    text-align: center;
+}
+
+#content .author {
+    font-style: italic;
+    margin-top: 1%;
+}
+
+ul {
+    text-align: left;
+}
