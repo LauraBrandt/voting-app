@@ -14,6 +14,7 @@
             newOption.setAttribute("type", "text");
             newOption.setAttribute("name", "answers");
             answersForm.appendChild(newOption);
+            newOption.focus();
         }, false);
     }
     

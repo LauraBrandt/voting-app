@@ -6,7 +6,7 @@ block content
     form.newPollForm(method='post' action='/createpoll')
         .form-group.questionForm
             label(for="question") Write your question:
-            input.form-control#question(type="text" name='question' required)
+            input.form-control#question(type="text" name='question' required autofocus)
         .form-group.answersForm
             label(for="answers") Options:
             input.form-control.answers(type="text" name="answers" required)
