@@ -6,6 +6,13 @@ block content
         .col-sm-3
         .col-sm-6
             h2 My Polls
+            if (polls.length === 0) 
+                p.no-polls.alert.alert-danger.text-center
+                    | You have no polls to display. 
+                    br
+                    | Why don't you 
+                    a(href="/createpoll").alert-link create one
+                    | ?
             ul.allpolls.list-group
                 each poll in polls   
                     li.list-group-item.row(id=poll._id)
