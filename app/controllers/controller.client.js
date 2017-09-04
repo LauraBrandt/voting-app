@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-    //console.log('in the controller!!');
     var apiUrl = window.location.origin + '/api/';
     
     var newOptionButton = document.querySelector('.addOption');
@@ -9,7 +8,6 @@
     
     if (newOptionButton) {
         newOptionButton.addEventListener('click', function () {
-            //console.log('newOptionButton clicked');
             var newOption = document.createElement("input");
             newOption.classList.add("form-control");
             newOption.classList.add("answers");
@@ -23,14 +21,13 @@
     
     if (newUserOptionButton) {
         newUserOptionButton.addEventListener('click', function () {
-            //console.log('newUserOptionButton clicked');
             /*
                 Replaces li with "Add new option" button with the following:
                 
                 li.list-group-item.newAnswer.radio
                     label
                         input(type='radio' name='answer' checked='checked')
-                        input(type='text')
+                        input.radioText(type='text')
             */
             var parent = document.querySelector('.newAnswer');
             var oldElem = newUserOptionButton;
@@ -51,12 +48,22 @@
             
             oldElem.parentNode.replaceChild(newElem, oldElem);
             parent.classList.add("radio");
+            newElemInput.focus();
             
-            /* Adds value attribute to the new radio button,
-                equal to the value in the new text box*/
+            /* On blur, if text was entered, 
+                    adds value attribute to the new radio button equal to the value in the new text box
+                or if blank,
+                    reverts to "Add new option" button
+            */
             var newOptionText = document.querySelector('.radioText');
-            newOptionText.addEventListener("change", function() {
-                newElemRadio.setAttribute("value", newOptionText.value);
+            newOptionText.addEventListener("blur", function() {
+                if (newOptionText.value) {
+                    newElemRadio.setAttribute("value", newOptionText.value);
+                }
+                else {
+                    newElem.parentNode.replaceChild(oldElem, newElem);
+                    parent.classList.remove("radio");
+                }
             });
         }, false);
     }
@@ -81,3 +88,27 @@
     }
     
 })();
+
+function beforeVoteSubmit() {
+    // Blur new answer textbox, so if empty won't be included in options,
+    // and if filled, value of textbox is given to its radio button
+    var radioText = document.querySelector('.radioText');
+    if (radioText) {
+        radioText.blur;
+    }
+    // Make sure a radio button is selected before submitting
+    var answerRadios = document.getElementsByName('answer');
+    var isChecked = false;
+    for ( var i = 0; i < answerRadios.length; i++) {
+        if(answerRadios[i].checked) {
+            isChecked = true;
+            break;
+        }
+    }
+    if(!isChecked) {
+        alert("Please choose an option.");
+        return false;
+    }
+    
+    return true; 
+}

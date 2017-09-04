@@ -6,22 +6,25 @@ var Polls = require('../models/polls.js');
 function PollHandler () {
     
     this.addPoll = function(userid, body, callback) {
-        console.log(userid);
-        console.log(JSON.stringify(body));
         Users
             .findOne({oauthID : userid})
             .exec(function(err, user) {
                 if (err) { throw err; }
                 
+                var answersObject = {};
+                for (var i=0; i<body.answers.length; i++) {
+                	var key = body.answers[i];
+                	answersObject[key] = 0;
+                }
+                
                 var newPoll = new Polls({
                     question: body.question,
-                    answers : body.answers,
+                    answersObject : answersObject,
                     creator : user._id
                 });
                 
                 newPoll.save(function(err, poll) {
                     if (err) { throw err; }
-	                
 	                callback(poll);
                 });
             });

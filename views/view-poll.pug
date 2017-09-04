@@ -7,7 +7,7 @@ block content
     .row
     .col-sm-3
     .col-sm-6
-        form(method='post' action='/voted/' + poll._id)
+        form.voteform(onsubmit="return beforeVoteSubmit()" method='post' action='/voted/' + poll._id)
             ul.list-group.form-group.options
                 for ans in poll.answers
                     li.list-group-item.radio
@@ -19,7 +19,7 @@ block content
                         button.addUserOption(type='button')
                             span.fa.fa-plus-square-o  
                             | Add new option...
-            button.btn.btn-primary.submitButton(type="submit") Vote!
+            button.btn.btn-primary.voteButton(type="submit" value="submit") Vote!
             button.btn.btn-default.resultsButton(type="button") View Results
     .col-sm-3
     

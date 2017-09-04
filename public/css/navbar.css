@@ -32,7 +32,6 @@
 
 #navbar .dropdown a:focus {
     background-color: inherit;
-    /*background-color: #4b83ad;*/
 }
 
 #navbar .dropdown-menu a {

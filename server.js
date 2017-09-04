@@ -7,7 +7,7 @@ var session = require('express-session');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
-var pageRoutes = require('./app/routes/pageRoutes.js');
+var appRoutes = require('./app/routes/appRoutes.js');
 var authRoutes = require('./app/routes/authRoutes.js');
 
 var app = express();
@@ -37,7 +37,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-pageRoutes(app, passport);
+appRoutes(app, passport);
 authRoutes(app, passport);
 
 var port = process.env.PORT || 8080;

@@ -5,9 +5,8 @@ var Schema = mongoose.Schema;
 
 var PollSchema = new Schema({
     question: String,
-    answers: [String],
     creator: { type: Schema.Types.ObjectId, ref: 'User' },
-    results: [{answer: Number}]
+    answersObject: Schema.Types.Mixed
 });
 
 PollSchema
@@ -15,5 +14,11 @@ PollSchema
     .get(function () {
         return '/polls/' + this.id + '-' + this.question;
     });
+    
+PollSchema
+    .virtual('answers')
+    .get(function () {
+        return Object.keys(this.answersObject);
+});
 
 module.exports = mongoose.model('Poll', PollSchema);

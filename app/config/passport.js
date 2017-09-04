@@ -100,7 +100,6 @@ module.exports = function (passport) {
     },
     function(token, refreshToken, profile, done) {
     	
-        console.log(profile);
         process.nextTick(function() {
             User.findOne({ 'oauthID' : profile.id }, function(err, user) {
                 if (err) {
