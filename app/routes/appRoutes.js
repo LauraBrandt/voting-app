@@ -74,27 +74,35 @@ module.exports = function (app, passport) {
 	    	});
     	});
 
-	app.get('/polls/:pollurl', function (req, res) {
-		var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
-		pollHandler.getPoll(pollid, function(poll) {
-			res.render('view-poll', 
-				{
-					auth: req.isAuthenticated(),
-					user: req.user,
-					title: poll.question,
-					page: '',
-					poll: poll
-				});
+	app.route('/polls/:pollurl')
+		.get(function (req, res) {
+			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
+			pollHandler.getPoll(pollid, function(poll) {
+				res.render('view-poll', 
+					{
+						auth: req.isAuthenticated(),
+						user: req.user,
+						title: poll.question,
+						page: '',
+						poll: poll
+					});
+			});
+		})
+		.post(function (req, res) {
+			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
+			pollHandler.updatePollResults(pollid, req.body, function(poll) {
+				res.render('results', 
+					{
+						auth: req.isAuthenticated(),
+						user: req.user,
+						title: poll.question,
+						page: '',
+						poll: poll
+					});
+			});
+			/*add poll answer to poll results, then redirect to results view*/
 		});
-		
-	});
-	
-	app.post('/voted/:pollID', function (req, res) {
-		/*add poll answer to poll results, then redirect to results view*/
-		res.write('You voted!');
-		res.end(JSON.stringify(req.body));
-	});
-	
+
 	app.route('/api/:pollid')
 		.get(function(req, res) {
 			pollHandler.getPoll(req.params.pollid, function(poll) {

@@ -1,0 +1,11 @@
+extend layout
+block head
+    link(rel='stylesheet', href='/public/css/results.css')
+block content
+    h1= poll.question
+    p.author Created by #{poll.creator.displayName}
+    div= poll
+    .row
+        .col-sm-3
+        .col-sm-6
+        .col-sm-3

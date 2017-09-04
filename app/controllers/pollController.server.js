@@ -62,6 +62,24 @@ function PollHandler () {
 				callback(poll);
 			});
 	};
+	
+	this.updatePollResults = function(pollid, body, callback) {
+		Polls
+			.findById(pollid)
+			.populate('creator')
+			.exec(function(err, poll) {
+				if (err) { throw err; }
+				
+				poll.answersObject[body.answer] += 1;
+				poll.markModified('answersObject');
+				
+				poll.save(function(err, poll) {
+					if (err) { throw err; }
+					
+					callback(poll);	
+				});
+			});
+	};
 }
 
 module.exports = PollHandler;
