@@ -3,11 +3,13 @@
     text-align: center;
 }
 
-#content .author {
+.author {
     font-style: italic;
     margin-top: 1%;
+    margin-bottom: 5%;
 }
 
-ul {
-    text-align: left;
+.canvas {
+    width: 65%;
+    margin: auto;
 }

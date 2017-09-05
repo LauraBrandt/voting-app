@@ -4,11 +4,11 @@ block head
 block content
     h1= poll.question
     p.author Created by #{poll.creator.displayName}
-    div= poll
-    .row
-        .col-sm-3
-        .col-sm-6
-            ul
-                each answer in poll.answers
-                    li= answer + ': ' + poll.resultsObject[answer]
-        .col-sm-3
+    
+    div.canvas
+        canvas#resultsChart
+
+    input#pollData(type="hidden" value=JSON.stringify(poll))
+    
+    script(src="../../node_modules/chart.js/dist/Chart.bundle.js")
+    script(type="text/javascript" src="../controllers/chart-controller.js")
