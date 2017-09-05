@@ -95,7 +95,7 @@ function beforeVoteSubmit() {
     // and if filled, value of textbox is given to its radio button
     var radioText = document.querySelector('.radioText');
     if (radioText) {
-        radioText.blur;
+        radioText.blur();
     }
     // Make sure a radio button is selected before submitting
     var answerRadios = document.getElementsByName('answer');
@@ -111,5 +111,5 @@ function beforeVoteSubmit() {
         return false;
     }
     
-    return true; 
+    return true;
 }
