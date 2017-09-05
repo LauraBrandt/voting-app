@@ -47,11 +47,14 @@ function PollHandler () {
 	    Users.findOne({oauthID: userid}).exec(function(err, user) {
 	        if (err) { throw err; }
 	        
-	        Polls.find({ creator: user._id }).exec(function(err, polls) {
-	            if (err) { throw err; }
-
-				callback(polls);
-	        });
+	        Polls
+	        	.find({ creator: user._id })
+	        	.sort({createdAt: 'desc'})
+	        	.exec(function(err, polls) {
+		            if (err) { throw err; }
+	
+					callback(polls);
+		        });
 	    });
 	};
 	
