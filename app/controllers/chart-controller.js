@@ -11,6 +11,7 @@ window.onload = function() {
     }
     
     var ctx = document.getElementById("resultsChart").getContext("2d");
+    Chart.defaults.global.defaultFontSize = 14;
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
