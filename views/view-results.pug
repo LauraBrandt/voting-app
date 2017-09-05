@@ -9,6 +9,6 @@ block content
         .col-sm-3
         .col-sm-6
             ul
-                each votes, answer in poll.answersObject
-                    li= answer + ': ' + votes
+                each answer in poll.answers
+                    li= answer + ': ' + poll.resultsObject[answer]
         .col-sm-3

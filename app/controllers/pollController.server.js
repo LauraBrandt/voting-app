@@ -11,22 +11,22 @@ function PollHandler () {
             .exec(function(err, user) {
                 if (err) { throw err; }
                 
-                var answersObject = {};
+                var resultsObject = {};
                 for (var i=0; i<body.answers.length; i++) {
                 	var key = body.answers[i];
-                	answersObject[key] = 0;
+                	resultsObject[key] = 0;
                 }
                 
                 var newPoll = new Polls({
                     question: body.question,
-                    answersObject : answersObject,
+                    answers: body.answers,
+                    resultsObject : resultsObject,
                     creator : user._id
                 });
                 
                 newPoll.save(function(err, poll) {
                     if (err) { throw err; }
                     
-                    console.log("in add poll, poll is", poll);
 	                callback(poll);
                 });
             });
@@ -75,15 +75,14 @@ function PollHandler () {
 			.exec(function(err, poll) {
 				if (err) { throw err; }
 				
-				console.log("in update poll, poll is", poll);
-				console.log("in update poll, answersObject[body.answer] is", poll.answersObject[body.answer]);
-				if (poll.answersObject[body.answer] >= 0 ) {
-					poll.answersObject[body.answer] += 1;
+				if (poll.resultsObject[body.answer] >= 0 ) {
+					poll.resultsObject[body.answer] += 1;
 				} else {
-					poll.answersObject[body.answer] = 1;
+					poll.resultsObject[body.answer] = 1;
+					poll.answers.push(body.answer);
 				}
 				
-				poll.markModified('answersObject');
+				poll.markModified('resultsObject');
 				
 				poll.save(function(err, poll) {
 					if (err) { throw err; }
