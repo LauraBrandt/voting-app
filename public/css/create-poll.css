@@ -7,29 +7,29 @@
     margin-bottom: 1.5em;
 }
 
-#content #question {
+#question {
     margin-bottom: 4%;
 }
 
-#content .answers {
+.answers {
     margin-bottom: 1%;
 }
 
-#content .btn {
+.newPollForm .btn {
     display: block;
 }
 
-#content .submit {
+.submit {
     margin: auto;
     margin-top: 3%;
     width: 200px;
 }
 
-#content .btn .fa {
+.newPollForm .btn .fa {
     padding-right: 0.5em;
 }
 
-#content .successMessage {
+.successMessage {
     text-align: center;
     font-size: 1.5em;
     margin: 0 auto;
@@ -37,17 +37,17 @@
     width: 60%;
 }
 
-#content .p1 {
+.p1 {
     margin: 0;
     margin-bottom: 10%;
     font-size: 1.2em;
 }
 
-#content .p2 {
+.p2 {
     margin: 0;
     margin-bottom: 2%;
 }
 
-#content .successMessage a {
+.successMessage a {
     word-break: break-all;
 }

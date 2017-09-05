@@ -3,23 +3,23 @@
     text-align: center;
 }
 
-#content .signins {
+.signins {
     margin-top: 4%;
     margin-bottom: 10%;
 }
 
-#content .btn {
+.signins .btn {
     display: block;
     width: 200px;
     margin: 1.5% auto;
     text-align: left;
 }
 
-#content .fa {
+.signins .fa {
     padding-right: 20px;
 }
 
-#content .getaccount ul {
+.getaccount ul {
     list-style-type: none;
     padding: 0;
     margin: 0;

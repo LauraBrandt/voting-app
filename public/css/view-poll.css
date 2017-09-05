@@ -3,7 +3,7 @@
     text-align: center;
 }
 
-#content .author {
+.author {
     font-style: italic;
     margin-top: 1%;
 }
@@ -17,17 +17,17 @@
     padding-left: 8%;
 }
 
-#content li span{
+#content li span {
     margin-left: 8px;
 }
 
-#content .voteButton {
+.voteButton {
     float: left;
     width: 130px;
     margin-bottom: 3%;
 }
 
-#content .resultsButton {
+.resultsButton {
     float: right;
 }
 
