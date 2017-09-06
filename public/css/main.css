@@ -1,6 +1,16 @@
 body {
 	margin: 0;
 	padding: 0;
+	background-image: url(/public/img/confectionary.png); /* downloaded from www.subtlepatterns.com */
+}
+
+h1, h2 {
+	font-family: "Montserrat", sans-serif;
+	background-color: rgba(255, 255, 255, 0.1);
+	display: inline-block;
+	padding: 1%;
+	border-radius: 20px;
+	text-align: center;
 }
 
 .container {

@@ -91,6 +91,27 @@ function PollHandler () {
 				});
 			});
 	};
+	
+	this.getAllPollsPaginated = function(pageNumber, callback) {
+		var perPage = 4;
+		
+		Polls
+			.find()
+			.limit(perPage)
+			.skip(pageNumber * perPage)
+			.sort({createdAt: 'desc'})
+			.exec(function(err, polls) {
+				if (err) { throw err; }
+				
+				Polls.count().exec(function (err, count) {
+					if (err) { throw err; }
+					
+					var numPages = Math.ceil(count/perPage);
+					//console.log(polls, numPages, count);
+					callback(polls, numPages);
+				});
+			});
+	};
 }
 
 module.exports = PollHandler;

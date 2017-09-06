@@ -1,3 +1,41 @@
 extend layout
+block head
+    link(rel='stylesheet', href='/public/css/all-polls.css')
 block content
-    p All Polls
+    h2 All Polls
+    
+    ul.list-group
+        each poll in polls
+            a.list-group-item(href="/polls/"+poll.url)= poll.question
+    
+    if numPages > 1
+        div.pageControls
+            - var i = 1;
+    
+            ul.pagination
+                li.prev
+                    a(href="/allpolls?page="+page) Prev
+                while i < numPages+1
+                    li(id="p"+i)
+                        a(href="/allpolls?page="+i)= i++
+                li.next
+                    a(href="/allpolls?page="+(page+2)) Next
+                
+    div.info(id=page name=numPages)
+    
+    script.
+        var page = parseInt(document.querySelector(".info").id) + 1;
+        var activeElement = document.querySelector("#p"+page);
+        activeElement.classList.add("active");
+        
+    script.
+        var prevButton = document.querySelector(".prev");
+        var nextButton = document.querySelector(".next");
+        var numPages = parseInt(document.querySelector(".info").getAttribute("name"));
+        var page = parseInt(document.querySelector(".info").id);
+        if (page === 0) {
+            prevButton.classList.add("disabled");
+        }
+        if (page+1 === numPages) {
+            nextButton.classList.add("disabled");
+        }

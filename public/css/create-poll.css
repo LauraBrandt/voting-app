@@ -1,10 +1,14 @@
 #content {
-    margin: 5% 15% 5% 15%;
+    margin: 3% 15% 3% 15%;
+    text-align: center;
 }
 
 #content h2 {
-    text-align: center;
     margin-bottom: 1.5em;
+}
+
+form {
+    text-align: left;
 }
 
 #question {
@@ -35,6 +39,7 @@
     margin: 0 auto;
     padding: 5%;
     width: 60%;
+    background-color: #fcfcfc;
 }
 
 .p1 {

@@ -1,0 +1,31 @@
+#content {
+    text-align: center;
+    width: 65%;
+    margin: 3% auto 5% auto;
+}
+
+#content h2 {
+    margin-bottom: 3%;
+}
+
+.list-group {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.list-group-item {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.pageControls {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.info {
+    display: none;
+}

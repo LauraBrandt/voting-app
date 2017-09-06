@@ -1,13 +1,13 @@
 #content {
-    padding: 2% 10%;
+    margin: 3% 25% 3% 25%;
+    text-align: center;
 }
 
 #content h2  {
-    text-align: center;
-    margin-bottom: 7%;
+    margin-bottom: 5%;
 }
 
-#content ul .row {
+#content ul .list-group-item {
     padding: 0;
 }
 

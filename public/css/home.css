@@ -5,6 +5,7 @@
 .jumbotron h1 {
 	font-family: 'Baloo Bhaijaan', cursive;
 	margin-top: 0;
+	background-color: none;
 }
 
 .jumbotron .description {

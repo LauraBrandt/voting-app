@@ -1,15 +1,15 @@
 #content {
-    margin: 4% 10%;
+    margin: 3% 10%;
     text-align: center;
 }
 
 .author {
     font-style: italic;
-    margin-top: 1%;
-    margin-bottom: 5%;
+    margin-top: 0;
+    margin-bottom: 4%;
 }
 
 .canvas {
-    width: 65%;
+    width: 70%;
     margin: auto;
 }

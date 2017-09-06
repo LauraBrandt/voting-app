@@ -17,13 +17,24 @@ module.exports = function (app, passport) {
 	});
 			
 	app.get('/allpolls', function (req, res) {
-		res.render('all-polls', 
-			{
-				auth: req.isAuthenticated(),
-				user: req.user,
-				title: 'All Polls',
-				page: 'allpolls'
-			});
+		var page
+		req.query.page ? page=req.query.page-1 : page=0;
+		pollHandler.getAllPollsPaginated(page, function(polls, numPages) {
+			if ( (page+1) > numPages ) {
+				res.end("that page doesn't exist");
+			} else {
+				res.render('all-polls', 
+					{
+						auth: req.isAuthenticated(),
+						user: req.user,
+						title: 'All Polls',
+						page: 'allpolls',
+						polls: polls,
+						page: page,
+						numPages: numPages
+					});	
+			}
+		});
 	});
 	
 	app.get('/login', function(req, res) {
