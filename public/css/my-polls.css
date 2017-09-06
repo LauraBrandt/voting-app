@@ -7,16 +7,13 @@
     margin-bottom: 5%;
 }
 
-#content ul .list-group-item {
-    padding: 0;
+.list-group-item {
+    text-align: right;
 }
 
 .pollLink {
-    display: block;
     padding: 2% 3%;
     color: #222;
-    border-radius: 0;
-    text-align: left;
     white-space: normal;
 }
 
@@ -24,21 +21,19 @@
     background-color: #dfe3ff;
 }
 
-.col-xs-1 {
-    padding: 0;
+.list-group-item p {
+    float: left;
+    padding: 1.5% 2%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+.buttons .btn {
+    margin-left: 1%;
 }
 
 .delete {
     font-size: 1.2em;
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-}
-
-.fa-trash {
-    display: block;
-    margin: 0.5em auto;
 }
 
 .no-polls {
