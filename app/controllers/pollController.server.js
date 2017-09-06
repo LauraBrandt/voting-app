@@ -93,7 +93,7 @@ function PollHandler () {
 	};
 	
 	this.getAllPollsPaginated = function(pageNumber, callback) {
-		var perPage = 4;
+		var perPage = 10;
 		
 		Polls
 			.find()
