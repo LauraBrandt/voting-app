@@ -6,14 +6,19 @@ module.exports = function (app, passport) {
 	
     var pollHandler = new PollHandler();
     
+    var numRandPolls = 6;
+    
 	app.get('/', function (req, res) {
-		res.render('home', 
-			{
-				auth: req.isAuthenticated(),
-				user: req.user,
-				title: 'Home',
-				page: 'home'
-			});
+		pollHandler.getRandomPolls(numRandPolls, function(polls) {
+			res.render('home', 
+				{
+					auth: req.isAuthenticated(),
+					user: req.user,
+					title: 'Home',
+					page: 'home', 
+					randPolls: polls
+				});
+		});
 	});
 			
 	app.get('/allpolls', function (req, res) {
@@ -131,6 +136,14 @@ module.exports = function (app, passport) {
 				res.send('/mypolls');
 			});
 		});
+	
+	function isLoggedIn (req, res, next) {
+		if (req.isAuthenticated()) {
+			return next();
+		} else {
+			res.redirect('/login');
+		}
+	}
 	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {

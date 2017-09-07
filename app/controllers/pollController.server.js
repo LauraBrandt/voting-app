@@ -112,6 +112,23 @@ function PollHandler () {
 				});
 			});
 	};
+	
+	this.getRandomPolls = function(numPolls, callback) {
+		Polls.count().exec(function (err, count) {
+			if (err) { throw err; }
+			Polls.find().exec(function(err, polls) {
+				if (err) { throw err; }
+				
+				var randomPolls = [];
+				for (var i=0; i<numPolls; i++) {
+					var randNumber = Math.floor(Math.random()*count);
+					randomPolls.push(polls[randNumber]);
+				}
+				
+				callback(randomPolls)
+			});
+		});
+	};
 }
 
 module.exports = PollHandler;

@@ -3,6 +3,7 @@
 (function () {
     var apiUrl = window.location.origin + '/api/';
     
+    /********* Create Poll page *********/
     var newOptionButton = document.querySelector('.addOption');
     var answersForm = document.querySelector('.answersForm');
     
@@ -17,6 +18,8 @@
             newOption.focus();
         }, false);
     }
+    
+    /********* View Poll page *********/
     
     var newUserOptionButton = document.querySelector('.addUserOption');
     
@@ -69,6 +72,8 @@
         }, false);
     }
     
+    /********* My Polls page *********/
+    
     var deleteButtons = document.querySelectorAll(".delete");
     
     if (deleteButtons) {
@@ -87,8 +92,10 @@
             });
         }
     }
-    
+
 })();
+
+/********* View Poll page *********/
 
 function beforeVoteSubmit() {
     // Blur new answer textbox, so if empty won't be included in options,

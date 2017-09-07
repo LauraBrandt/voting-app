@@ -38,5 +38,16 @@ block content
                         | Login with Google
     .examplepolls
         h3 Check out some of the polls other users have made:
-
-
+        
+        .random-polls.row
+            each poll in randPolls
+                .col-sm-2.col-md-3.col-lg-4.col
+                    a.pollLink(href='/polls/'+poll.url)
+                        .pollImageContainer(href='/polls/'+poll.url)
+                            .overlay
+                            h4.question= poll.question
+                            each ans in poll.answers
+                                p.answer= ans
+                        
+    script(type="text/javascript" src="common/ajax-functions.js")
+    script(type="text/javascript" src="controllers/controller.client.js")
