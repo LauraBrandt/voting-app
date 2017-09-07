@@ -2,7 +2,7 @@ extend layout
 block head
     link(rel='stylesheet', href='/public/css/my-polls.css')
 block content
-    h2 My Polls
+    h2 Here are the polls you've created:
     if (polls.length === 0) 
         p.no-polls.alert.alert-danger.text-center
             | You have no polls to display. 
@@ -11,19 +11,16 @@ block content
             a(href="/createpoll").alert-link create one
             | ?
     ul.allpolls.list-group
-        each poll in polls   
-            li.list-group-item(id=poll._id)
-                p= poll.question
-                .buttons
-                    a.btn.btn-primary(href='/results/'+poll.url) View Results
-                    a.btn.btn-info(href='/polls/'+poll.url) View Poll
-                    .btn.btn-danger.delete(id=poll._id data-toggle="tooltip" title="Delete poll")
-                        span.fa.fa-trash
-            //    
-                a.btn.col-xs-11.pollLink(href='/results/'+poll.url)= poll.question
-                .col-xs-1
-                    .btn.btn-default.delete(id=poll._id)
-                        span.fa.fa-trash.text-danger(data-toggle="tooltip" title="Delete poll")
+        each poll in polls
+            li.list-group-item(id=poll._id).row
+                .col-sm-7
+                    p= poll.question
+                .col-sm-5
+                    .buttons
+                        a.btn.btn-primary(href='/results/'+poll.url) View Results
+                        a.btn.btn-info(href='/polls/'+poll.url) View Poll
+                        .btn.btn-danger.delete(id=poll._id data-toggle="tooltip" title="Delete poll")
+                            span.fa.fa-trash
         
     script(type="text/javascript" src="common/ajax-functions.js")
     script(type="text/javascript" src="controllers/controller.client.js")

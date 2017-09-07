@@ -7,29 +7,23 @@
     margin-bottom: 5%;
 }
 
-.list-group-item {
-    text-align: right;
+.row {
+    padding: 1% 0 1% 2%;
 }
 
-.pollLink {
-    padding: 2% 3%;
-    color: #222;
-    white-space: normal;
-}
-
-.pollLink:hover {
-    background-color: #dfe3ff;
+.col-sm-5, .col-sm-7 {
+    padding: 0;
 }
 
 .list-group-item p {
-    float: left;
-    padding: 1.5% 2%;
+    text-align: left;
+    padding: 1% 2%;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
 }
 
 .buttons .btn {
-    margin-left: 1%;
+    margin: 0.5% 1%;
 }
 
 .delete {
