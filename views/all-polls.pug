@@ -2,7 +2,10 @@ extend layout
 block head
     link(rel='stylesheet', href='/public/css/all-polls.css')
 block content
-    h2 Check out all the polls users have created:
+    h2 Check out all the polls users have created. 
+        br
+        | Click on one of them to vote.
+    //h2 Vote on one of the polls other users have created:
     
     ul.list-group
         each poll in polls
@@ -14,28 +17,28 @@ block content
     
             ul.pagination
                 li.prev
-                    a(href="/allpolls?page="+page) Prev
+                    a(href="/allpolls?page="+pageNum) Prev
                 while i < numPages+1
                     li(id="p"+i)
                         a(href="/allpolls?page="+i)= i++
                 li.next
-                    a(href="/allpolls?page="+(page+2)) Next
+                    a(href="/allpolls?page="+(pageNum+2)) Next
                 
-    div.info(id=page name=numPages)
+    div.info(id=pageNum name=numPages)
     
     script.
-        var page = parseInt(document.querySelector(".info").id) + 1;
-        var activeElement = document.querySelector("#p"+page);
+        var pageNum = parseInt(document.querySelector(".info").id) + 1;
+        var activeElement = document.querySelector("#p"+pageNum);
         activeElement.classList.add("active");
         
     script.
         var prevButton = document.querySelector(".prev");
         var nextButton = document.querySelector(".next");
         var numPages = parseInt(document.querySelector(".info").getAttribute("name"));
-        var page = parseInt(document.querySelector(".info").id);
-        if (page === 0) {
+        var pageNum = parseInt(document.querySelector(".info").id);
+        if (pageNum === 0) {
             prevButton.classList.add("disabled");
         }
-        if (page+1 === numPages) {
+        if (pageNum+1 === numPages) {
             nextButton.classList.add("disabled");
         }

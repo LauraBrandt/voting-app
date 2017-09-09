@@ -5,11 +5,11 @@ var Polls = require('../models/polls.js');
 
 function PollHandler () {
     
-    this.addPoll = function(userid, body, callback) {
+    this.addPoll = function(userid, body, callback, next) {
         Users
             .findOne({oauthID : userid})
             .exec(function(err, user) {
-                if (err) { throw err; }
+                if (err) { return next(err); }
                 
                 var resultsObject = {};
                 for (var i=0; i<body.answers.length; i++) {
@@ -25,55 +25,55 @@ function PollHandler () {
                 });
                 
                 newPoll.save(function(err, poll) {
-                    if (err) { throw err; }
+                    if (err) { return next(err); }
                     
 	                callback(poll);
                 });
             });
     };
 
-	this.getPoll = function(pollid, callback) {
+	this.getPoll = function(pollid, callback, next) {
 		Polls
 			.findById({ _id : pollid })
 			.populate('creator')
 			.exec(function (err, poll) {
-				if (err) { throw err; }
+				if (err) { return next(err); }
 
 				callback(poll);
 			});
 	};
 	
-	this.getUserPolls = function(userid, callback) {
+	this.getUserPolls = function(userid, callback, next) {
 	    Users.findOne({oauthID: userid}).exec(function(err, user) {
-	        if (err) { throw err; }
+	        if (err) { return next(err); }
 	        
 	        Polls
 	        	.find({ creator: user._id })
 	        	.sort({createdAt: 'desc'})
 	        	.exec(function(err, polls) {
-		            if (err) { throw err; }
+		            if (err) { return next(err); }
 	
 					callback(polls);
 		        });
 	    });
 	};
 	
-	this.deletePoll = function(pollid, callback) {
+	this.deletePoll = function(pollid, callback, next) {
 	    Polls
 	        .findByIdAndRemove(pollid)
 			.exec(function (err, poll) {
-				if (err) { throw err; }
+				if (err) { return next(err); }
 
 				callback(poll);
 			});
 	};
 	
-	this.updatePollResults = function(pollid, body, callback) {
+	this.updatePollResults = function(pollid, body, callback, next) {
 		Polls
 			.findById(pollid)
 			.populate('creator')
 			.exec(function(err, poll) {
-				if (err) { throw err; }
+				if (err) { return next(err); }
 				
 				if (poll.resultsObject[body.answer] >= 0 ) {
 					poll.resultsObject[body.answer] += 1;
@@ -85,14 +85,14 @@ function PollHandler () {
 				poll.markModified('resultsObject');
 				
 				poll.save(function(err, poll) {
-					if (err) { throw err; }
+					if (err) { return next(err); }
 					
 					callback(poll);	
 				});
 			});
 	};
 	
-	this.getAllPollsPaginated = function(pageNumber, callback) {
+	this.getAllPollsPaginated = function(pageNumber, callback, next) {
 		var perPage = 10;
 		
 		Polls
@@ -101,10 +101,10 @@ function PollHandler () {
 			.skip(pageNumber * perPage)
 			.sort({createdAt: 'desc'})
 			.exec(function(err, polls) {
-				if (err) { throw err; }
+				if (err) { return next(err); }
 				
 				Polls.count().exec(function (err, count) {
-					if (err) { throw err; }
+					if (err) { return next(err); }
 					
 					var numPages = Math.ceil(count/perPage);
 					//console.log(polls, numPages, count);
@@ -113,11 +113,11 @@ function PollHandler () {
 			});
 	};
 	
-	this.getRandomPolls = function(numPolls, callback) {
+	this.getRandomPolls = function(numPolls, callback,  next) {
 		Polls.count().exec(function (err, count) {
-			if (err) { throw err; }
+			if (err) { return next(err); }
 			Polls.find().exec(function(err, polls) {
-				if (err) { throw err; }
+				if (err) { return next(err); }
 				
 				var randomPolls = [];
 				var max = count;

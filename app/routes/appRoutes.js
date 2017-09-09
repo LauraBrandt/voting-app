@@ -8,7 +8,7 @@ module.exports = function (app, passport) {
     
     var numRandPolls = 6;
     
-	app.get('/', function (req, res) {
+	app.get('/', function (req, res, next) {
 		pollHandler.getRandomPolls(numRandPolls, function(polls) {
 			res.render('home', 
 				{
@@ -18,15 +18,20 @@ module.exports = function (app, passport) {
 					page: 'home', 
 					randPolls: polls
 				});
-		});
+		}, next);
 	});
 			
-	app.get('/allpolls', function (req, res) {
-		var page
+	app.get('/allpolls', function (req, res, next) {
+		var page;
 		req.query.page ? page=req.query.page-1 : page=0;
 		pollHandler.getAllPollsPaginated(page, function(polls, numPages) {
 			if ( (page+1) > numPages ) {
-				res.end("that page doesn't exist");
+				res.render('error', {
+					auth: req.isAuthenticated(),
+					user: req.user,
+					title: 'Not Found',
+					page: 'notfound'
+				});
 			} else {
 				res.render('all-polls', 
 					{
@@ -35,11 +40,11 @@ module.exports = function (app, passport) {
 						title: 'All Polls',
 						page: 'allpolls',
 						polls: polls,
-						page: page,
+						pageNum: page,
 						numPages: numPages
 					});	
 			}
-		});
+		}, next);
 	});
 	
 	app.get('/login', function(req, res) {
@@ -52,7 +57,7 @@ module.exports = function (app, passport) {
 			});
     });
 	
-	app.get('/mypolls', isLoggedIn, function (req, res) {
+	app.get('/mypolls', isLoggedIn, function (req, res, next) {
 		pollHandler.getUserPolls(req.user.oauthID, function(polls) {
 	    		 res.render('my-polls',
 	    			{
@@ -62,7 +67,7 @@ module.exports = function (app, passport) {
 	    				page: 'mypolls',
 	    				polls: polls
 	    			});
-	    	});
+	    	}, next);
 	});
 	
 	app.route('/createpoll')
@@ -76,7 +81,7 @@ module.exports = function (app, passport) {
 				});
 		
 		})
-		.post(isLoggedIn, function(req, res) {
+		.post(isLoggedIn, function(req, res, next) {
 	    	pollHandler.addPoll(req.user.oauthID, req.body, function(poll) {
 	    		 res.render('create-poll-success', 
 	    			{
@@ -87,11 +92,11 @@ module.exports = function (app, passport) {
 	    				baseUrl: req.headers.host,
 	    				url: '/polls/' + poll.url
 	    			});
-	    	});
+	    	}, next);
     	});
 
 	app.route('/polls/:pollurl')
-		.get(function (req, res) {
+		.get(function (req, res, next) {
 			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
 			pollHandler.getPoll(pollid, function(poll) {
 				res.render('view-poll', 
@@ -102,16 +107,16 @@ module.exports = function (app, passport) {
 						page: '',
 						poll: poll
 					});
-			});
+			}, next);
 		})
-		.post(function (req, res) {
+		.post(function (req, res, next) {
 			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
 			pollHandler.updatePollResults(pollid, req.body, function(poll) {
 				res.redirect('/results/'+poll.url);
-			});
+			}, next);
 		});
 
-	app.get('/results/:pollurl', function (req, res) {
+	app.get('/results/:pollurl', function (req, res, next) {
 		var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
 		pollHandler.getPoll(pollid, function(poll) {
 			res.render('view-results', 
@@ -122,28 +127,20 @@ module.exports = function (app, passport) {
 					page: '',
 					poll: poll
 				});
-		});
+		}, next);
 	});
 
 	app.route('/api/:pollid')
-		.get(function(req, res) {
+		.get(function(req, res, next) {
 			pollHandler.getPoll(req.params.pollid, function(poll) {
 				res.send(poll);
-			});
+			}, next);
 		})
-		.delete(function(req, res) {
+		.delete(function(req, res, next) {
 			pollHandler.deletePoll(req.params.pollid, function(poll) {
 				res.send('/mypolls');
-			});
+			}, next);
 		});
-	
-	function isLoggedIn (req, res, next) {
-		if (req.isAuthenticated()) {
-			return next();
-		} else {
-			res.redirect('/login');
-		}
-	}
 	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {

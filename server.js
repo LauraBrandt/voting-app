@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var appRoutes = require('./app/routes/appRoutes.js');
 var authRoutes = require('./app/routes/authRoutes.js');
+var errorRoutes = require('./app/routes/errorRoutes.js');
 
 var app = express();
 require('dotenv').load();
@@ -40,6 +41,7 @@ app.use(passport.session());
 
 appRoutes(app, passport);
 authRoutes(app, passport);
+errorRoutes(app, passport);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
