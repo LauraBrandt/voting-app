@@ -29,6 +29,11 @@ window.onload = function() {
                 display: false
             },
             scales: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false
+                    }
+                }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
