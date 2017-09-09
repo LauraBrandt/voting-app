@@ -120,12 +120,23 @@ function PollHandler () {
 				if (err) { throw err; }
 				
 				var randomPolls = [];
+				var max = count;
 				for (var i=0; i<numPolls; i++) {
-					var randNumber = Math.floor(Math.random()*count);
+					var randNumber = Math.floor(Math.random()*max);
 					randomPolls.push(polls[randNumber]);
+					
+					/* Swap random poll and last poll, then decrease max by 1,
+						which will ensure polls are not repeated.
+						Based on Fisher-Yates shuffle */
+					var temp1 = polls[randNumber];
+					var temp2 = polls[max-1];
+					polls[randNumber] = temp2;
+					polls[max-1] = temp1;
+					
+					max = max-1;
 				}
 				
-				callback(randomPolls)
+				callback(randomPolls);
 			});
 		});
 	};
