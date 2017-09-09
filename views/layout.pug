@@ -14,10 +14,25 @@ html(lang='en')
     block head
   body
     #navbar
-        if auth 
-            include navbar_auth.pug
-        else
-            include navbar_unauth.pug
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    button.navbar-toggle(type="button" data-toggle="collapse" data-target="#pollplaceNavbar")
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='/' class=page=='home' ? 'active' : '') PollPlace
+                .collapse.navbar-collapse#pollplaceNavbar
+                    ul.nav.navbar-nav
+                        li
+                            a(href='/allpolls' class=page=='allpolls' ? 'active' : '') 
+                                span.fa.fa-pencil-square-o  
+                                | All Polls
+                    ul.nav.navbar-nav.navbar-right
+                        if auth 
+                            include navbar_auth.pug
+                        else
+                            include navbar_unauth.pug
     .container
         #content    
             block content
