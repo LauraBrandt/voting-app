@@ -43,17 +43,26 @@ function PollHandler () {
 			});
 	};
 	
-	this.getUserPolls = function(userid, callback, next) {
+	this.getUserPollsPaginated = function(userid, pageNumber, callback, next) {
+		var perPage = 15;
+		
 	    Users.findOne({oauthID: userid}).exec(function(err, user) {
 	        if (err) { return next(err); }
 	        
 	        Polls
 	        	.find({ creator: user._id })
-	        	.sort({createdAt: 'desc'})
+	        	.limit(perPage)
+				.skip(pageNumber * perPage)
+				.sort({createdAt: 'desc'})
 	        	.exec(function(err, polls) {
 		            if (err) { return next(err); }
-	
-					callback(polls);
+		            
+					Polls.count().exec(function (err, count) {
+						if (err) { return next(err); }
+						
+						var numPages = Math.ceil(count/perPage);
+						callback(polls, numPages);
+					});
 		        });
 	    });
 	};
@@ -107,7 +116,7 @@ function PollHandler () {
 					if (err) { return next(err); }
 					
 					var numPages = Math.ceil(count/perPage);
-					//console.log(polls, numPages, count);
+					
 					callback(polls, numPages);
 				});
 			});

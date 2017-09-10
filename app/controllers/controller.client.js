@@ -92,6 +92,27 @@
             });
         }
     }
+    
+    /********* pagination (various pages) *********/
+    var pageInfo = document.querySelector(".page-info");
+    
+    if (pageInfo) {
+        var pageNum = parseInt(pageInfo.id, 10) + 1;
+        
+        var activeElement = document.querySelector("#p"+pageNum);
+        activeElement.classList.add("active");
+        
+        var prevButton = document.querySelector(".prev");
+        var nextButton = document.querySelector(".next");
+        var numPages = parseInt(document.querySelector(".page-info").getAttribute("name"), 10);
+        if (pageNum === 1) {
+            prevButton.classList.add("disabled");
+        }
+        if (pageNum === numPages) {
+            nextButton.classList.add("disabled");
+        }
+    }
+    
 
 })();
 

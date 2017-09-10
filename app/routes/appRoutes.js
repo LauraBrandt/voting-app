@@ -30,7 +30,8 @@ module.exports = function (app, passport) {
 					auth: req.isAuthenticated(),
 					user: req.user,
 					title: 'Not Found',
-					page: 'notfound'
+					page: 'notfound',
+					status: '404'
 				});
 			} else {
 				res.render('all-polls', 
@@ -58,16 +59,30 @@ module.exports = function (app, passport) {
     });
 	
 	app.get('/mypolls', isLoggedIn, function (req, res, next) {
-		pollHandler.getUserPolls(req.user.oauthID, function(polls) {
+		var page;
+		req.query.page ? page=req.query.page-1 : page=0;
+		pollHandler.getUserPollsPaginated(req.user.oauthID, page, function(polls, numPages) {
+			if ( (page+1) > numPages ) {
+				res.render('error', {
+					auth: req.isAuthenticated(),
+					user: req.user,
+					title: 'Not Found',
+					page: 'notfound',
+					status: '404'
+				});
+			} else {
 	    		 res.render('my-polls',
 	    			{
 	    				auth: true,
 	    				user: req.user,
 	    				title: 'My Polls',
 	    				page: 'mypolls',
-	    				polls: polls
+	    				polls: polls,
+	    				pageNum: page,
+						numPages: numPages
 	    			});
-	    	}, next);
+			}
+	    }, next);
 	});
 	
 	app.route('/createpoll')

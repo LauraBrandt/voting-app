@@ -34,6 +34,19 @@
     font-size: 1.2em;
 }
 
+.pageControls {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.page-info {
+    display: none;
+}
+
 .no-polls {
      font-size: 1.2em;
      margin-top: 3%;

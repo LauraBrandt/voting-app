@@ -21,21 +21,6 @@ block content
                 li.next
                     a(href="/allpolls?page="+(pageNum+2)) Next
                 
-    div.info(id=pageNum name=numPages)
-    
-    script.
-        var pageNum = parseInt(document.querySelector(".info").id) + 1;
-        var activeElement = document.querySelector("#p"+pageNum);
-        activeElement.classList.add("active");
+    div.page-info(id=pageNum name=numPages)
         
-    script.
-        var prevButton = document.querySelector(".prev");
-        var nextButton = document.querySelector(".next");
-        var numPages = parseInt(document.querySelector(".info").getAttribute("name"));
-        var pageNum = parseInt(document.querySelector(".info").id);
-        if (pageNum === 0) {
-            prevButton.classList.add("disabled");
-        }
-        if (pageNum+1 === numPages) {
-            nextButton.classList.add("disabled");
-        }
+    script(type="text/javascript" src="controllers/controller.client.js")
