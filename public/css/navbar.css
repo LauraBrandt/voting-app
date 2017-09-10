@@ -22,10 +22,6 @@
     font-weight: 700;
 }
 
-#navbar .active {
-    background-color: #0C436D;
-}
-
 #navbar .fa {
     padding-right: 0.4em;
 }
@@ -34,6 +30,12 @@
     background-color: inherit;
 }
 
-#navbar .dropdown-menu a {
-    color: black;
+@media (min-width: 740px) {
+    #navbar .active {
+        background-color: #0C436D;
+    }
+    
+    #navbar .dropdown-menu a {
+        color: black;
+    }
 }

@@ -7,7 +7,18 @@
 }
 
 .panel-heading {
-	padding-top: 3%;
-	padding-bottom: 3%;
-	line-height: 200%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+@media (max-width: 600px) {
+	.panel {
+		font-size: 1.4em;
+	}
+}
+
+@media (orientation: portrait) {
+	.panel{
+		margin-top: 10%;
+	}
 }

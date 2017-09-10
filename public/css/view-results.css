@@ -13,3 +13,27 @@
     width: 70%;
     margin: auto;
 }
+
+@media (max-width: 750px) {
+    #content h1  {
+        font-size: 1.4em;
+    }
+    .author {
+        font-size: 0.9em;
+    }
+}
+
+@media (orientation: portrait) {
+    .canvas  {
+        width: 100%;
+    }
+    .author {
+        margin-bottom: 13%;
+    }
+}
+
+@media (min-width: 1700px) {
+    .author {
+        margin-bottom: 6%;
+    }
+}

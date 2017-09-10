@@ -24,3 +24,13 @@
     padding: 0;
     margin: 0;
 }
+
+@media (max-width: 550px) {
+    .signins {
+        margin-top: 8%;
+        margin-bottom: 20%;
+    }
+    .signins .btn {
+        margin: 6% auto;
+    }	
+}

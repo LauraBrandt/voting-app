@@ -4,9 +4,9 @@ block head
 block content
     .errorMessage.panel.panel-danger
         if status === '404'
-            .panel-heading Error: 404
-                br
-                | Sorry, that page doesn't exist.
+            .panel-heading 
+                p Error: 404
+                p Sorry, that page doesn't exist.
         else
             .panel-heading Error: #{status}
                 br

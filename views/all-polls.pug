@@ -2,10 +2,7 @@ extend layout
 block head
     link(rel='stylesheet', href='/public/css/all-polls.css')
 block content
-    h2 Check out all the polls users have created. 
-        br
-        | Click on one of them to vote.
-    //h2 Vote on one of the polls other users have created:
+    h2 Vote on one of the polls other users have created:
     
     ul.list-group
         each poll in polls

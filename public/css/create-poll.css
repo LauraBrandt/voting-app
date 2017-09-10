@@ -56,3 +56,34 @@ form {
 .successMessage a {
     word-break: break-all;
 }
+
+@media (max-width: 800px) {
+	#content {
+	    margin: 3% 8% 10% 8%;
+	}
+	
+	#content h2 {
+        margin-bottom: 1em;
+    }
+	
+	.successMessage {
+	    width: 100%;
+	    padding: 8%;
+	}
+}
+
+@media (max-width: 550px) {
+    .submit {
+        margin-top: 10%;
+    }
+    
+    .successMessage {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 1700px) {
+    #content {
+        margin: 3% 25% 3% 25%;
+    }
+}

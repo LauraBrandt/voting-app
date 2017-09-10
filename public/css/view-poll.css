@@ -9,7 +9,7 @@
     margin-bottom: 2%;
 }
 
-#content form {
+form {
     margin: 3% auto;
     text-align: left;
 }
@@ -25,14 +25,13 @@
 .voteButton {
     float: left;
     width: 130px;
-    margin-bottom: 3%;
 }
 
 .resultsButton {
     float: right;
 }
 
-#content .addUserOption {
+.addUserOption {
     border: none;
     background-color: inherit;
     padding: 0;
@@ -40,11 +39,37 @@
     color: #4F84AC;
 }
 
-#content .addUserOption .fa {
+.addUserOption .fa {
     padding-right: 0.5em;
 }
 
-#content .addUserOption:hover {
+.addUserOption:hover {
     color: #336A94;
     text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+    #content h1  {
+        font-size: 1.6em;
+    }
+    form {
+        margin: 7% auto;
+    }
+    .btn {
+        display: block;
+        width: 100%;
+    }
+    .voteButton {
+        margin-bottom: 3%;
+        margin-top: 5%;
+    }
+    .resultsButton {
+        margin-bottom: 10%;
+    }
+}
+
+@media (min-width: 1700px) {
+    .list-group {
+        margin-bottom: 5%;
+    }
 }
