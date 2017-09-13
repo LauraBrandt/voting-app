@@ -125,6 +125,11 @@ function beforeVoteSubmit() {
     if (radioText) {
         radioText.blur();
     }
+    // Make sure current user/ip hasn't already voted on the poll
+    if (document.querySelector('.voteButton').classList.contains('disabled')) {
+        alert("You can only vote once on a poll.");
+        return false;
+    }
     // Make sure a radio button is selected before submitting
     var answerRadios = document.getElementsByName('answer');
     var isChecked = false;

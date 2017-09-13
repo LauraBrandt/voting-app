@@ -114,17 +114,17 @@ module.exports = function (app, passport) {
 		.get(function (req, res, next) {
 			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
 			hasVoted(pollid, req, function(voted) {
-				console.log("already voted?:", voted);
-			}, next);
-			pollHandler.getPoll(pollid, function(poll) {
-				res.render('view-poll', 
-					{
-						auth: req.isAuthenticated(),
-						user: req.user,
-						title: poll.question,
-						page: '',
-						poll: poll
-					});
+				pollHandler.getPoll(pollid, function(poll) {
+					res.render('view-poll', 
+						{
+							auth: req.isAuthenticated(),
+							user: req.user,
+							title: poll.question,
+							page: '',
+							poll: poll,
+							voted: voted
+						});
+				}, next);
 			}, next);
 		})
 		.post(function (req, res, next) {

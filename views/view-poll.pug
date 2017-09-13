@@ -4,23 +4,26 @@ block head
 block content
     h1= poll.question
     p.author Created by #{poll.creator.displayName}
-    .row
+        .row
     .col-sm-3
     .col-sm-6
+        if voted
+            .alert.alert-danger You have already voted on this poll.
         form.voteform(onsubmit="return beforeVoteSubmit()" method='post' action='/polls/'+poll.url)
             ul.list-group.form-group.options
                 for ans in poll.answers
                     li.list-group-item.radio
                         label
-                            input(type='radio' name='answer' value=ans)
+                            input(type='radio' name='answer' value=ans disabled=voted)
                             span #{ans}
-                if auth
+                if auth && !voted
                     li.list-group-item.newAnswer
                         button.addUserOption(type='button')
                             span.fa.fa-plus-square-o  
                             | Add new option...
-            button.btn.btn-primary.voteButton(type="submit" value="submit") Vote!
+            button.btn.btn-primary.voteButton(type="submit" value="submit" class=voted?"disabled":"") Vote!
             a.btn.btn-default.resultsButton(type="button" href='/results/'+poll.url) View Results
     .col-sm-3
     
     script(type="text/javascript" src="../controllers/controller.client.js")
+    
