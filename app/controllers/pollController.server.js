@@ -77,7 +77,7 @@ function PollHandler () {
 			});
 	};
 	
-	this.updatePollResults = function(pollid, body, callback, next) {
+	this.updatePollResults = function(pollid, voter, body, callback, next) {
 		Polls
 			.findById(pollid)
 			.populate('creator')
@@ -93,9 +93,11 @@ function PollHandler () {
 				
 				poll.markModified('resultsObject');
 				
+				poll.voters.push(voter);
+				
 				poll.save(function(err, poll) {
 					if (err) { return next(err); }
-					
+
 					callback(poll);	
 				});
 			});
@@ -149,6 +151,7 @@ function PollHandler () {
 			});
 		});
 	};
+	
 }
 
 module.exports = PollHandler;

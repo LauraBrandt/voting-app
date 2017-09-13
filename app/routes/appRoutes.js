@@ -113,6 +113,9 @@ module.exports = function (app, passport) {
 	app.route('/polls/:pollurl')
 		.get(function (req, res, next) {
 			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
+			hasVoted(pollid, req, function(voted) {
+				console.log("already voted?:", voted);
+			}, next);
 			pollHandler.getPoll(pollid, function(poll) {
 				res.render('view-poll', 
 					{
@@ -126,7 +129,8 @@ module.exports = function (app, passport) {
 		})
 		.post(function (req, res, next) {
 			var pollid = req.params.pollurl.match(/[^\-]*/)[0];  // Get the url up to the first '-'
-			pollHandler.updatePollResults(pollid, req.body, function(poll) {
+			var user =  req.user ? req.user.oauthID : req.ip;
+			pollHandler.updatePollResults(pollid, user, req.body, function(poll) {
 				res.redirect('/results/'+poll.url);
 			}, next);
 		});
@@ -163,6 +167,13 @@ module.exports = function (app, passport) {
 		} else {
 			res.redirect('/login');
 		}
+	}
+	
+	function hasVoted(pollid, req, callback, next) {
+		var user =  req.user ? req.user.oauthID : req.ip;
+		pollHandler.getPoll(pollid, function(poll) {
+			callback(poll.voters.indexOf(user) > -1);
+		}, next);
 	}
 	
 };

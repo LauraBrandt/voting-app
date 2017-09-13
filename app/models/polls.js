@@ -8,7 +8,8 @@ var PollSchema = new Schema({
     answers: [String],
     creator: { type: Schema.Types.ObjectId, ref: 'User' },
     resultsObject: Schema.Types.Mixed,
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    voters: [String]
 });
 
 PollSchema
