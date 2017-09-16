@@ -3,15 +3,18 @@ block head
     link(rel='stylesheet', href='/public/css/all-polls.css')
 block content
     h2 Vote on one of the polls other users have created:
-    
+
+    if (polls.length === 0)
+      include no-polls.pug
+
     ul.list-group
         each poll in polls
             a.list-group-item(href="/polls/"+poll.url)= poll.question
-    
+
     if numPages > 1
         div.pageControls
             - var i = 1;
-    
+
             ul.pagination
                 li.prev
                     a(href="/allpolls?page="+pageNum) Prev
@@ -20,7 +23,7 @@ block content
                         a(href="/allpolls?page="+i)= i++
                 li.next
                     a(href="/allpolls?page="+(pageNum+2)) Next
-                
+
     div.page-info(id=pageNum name=numPages)
-        
+
     script(type="text/javascript" src="controllers/controller.client.js")

@@ -12,7 +12,7 @@ var authRoutes = require('./app/routes/authRoutes.js');
 var errorRoutes = require('./app/routes/errorRoutes.js');
 
 var app = express();
-require('dotenv').load();
+//require('dotenv').load();
 require('./app/config/passport')(passport);
 app.use(morgan('dev'));
 

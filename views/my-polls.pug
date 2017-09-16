@@ -3,12 +3,8 @@ block head
     link(rel='stylesheet', href='/public/css/my-polls.css')
 block content
     h2 Here are the polls you've created:
-    if (polls.length === 0) 
-        .no-polls.alert.alert-danger.text-center
-            p You have no polls to display. 
-            p Why don't you 
-                a(href="/createpoll").alert-link create one
-                | ?
+    if (polls.length === 0)
+        include no-polls.pug
     ul.allpolls.list-group
         each poll in polls
             li.list-group-item(id=poll._id).row
@@ -20,11 +16,11 @@ block content
                         a.btn.btn-info(href='/polls/'+poll.url) View Poll
                         .btn.btn-danger.delete(id=poll._id data-toggle="tooltip" title="Delete poll")
                             span.fa.fa-trash
-    
+
     if numPages > 1
         div.pageControls
             - var i = 1;
-    
+
             ul.pagination
                 li.prev
                     a(href="/mypolls?page="+pageNum) Prev
@@ -33,9 +29,8 @@ block content
                         a(href="/mypolls?page="+i)= i++
                 li.next
                     a(href="/mypolls?page="+(pageNum+2)) Next
-                    
+
     div.page-info(id=pageNum name=numPages)
-    
+
     script(type="text/javascript" src="common/ajax-functions.js")
     script(type="text/javascript" src="controllers/controller.client.js")
-    

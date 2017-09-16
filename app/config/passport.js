@@ -20,7 +20,7 @@ module.exports = function (passport) {
 	});
 
 	/****************************** FACEBOOK ******************************/
-	
+
 	passport.use(new FacebookStrategy({
 		clientID: configAuth.facebook.clientID,
 		clientSecret: configAuth.facebook.clientSecret,
@@ -32,13 +32,13 @@ module.exports = function (passport) {
 				if (err) {
 					return done(err);
 				}
-				
+
 				if (user) {
 					return done(null, user);
-					
+
 				} else {
 					var newUser = new User();
-					
+
 					newUser.oauthID = profile.id;
                 	newUser.displayName = profile.displayName;
 
@@ -53,10 +53,10 @@ module.exports = function (passport) {
 			});
 		});
 	}));
-		
-		
+
+
 	/****************************** TWITTER ******************************/
-	
+
 	passport.use(new TwitterStrategy({
         consumerKey     : configAuth.twitter.consumerKey,
         consumerSecret  : configAuth.twitter.consumerSecret,
@@ -64,15 +64,15 @@ module.exports = function (passport) {
 	},
 	function(token, tokenSecret, profile, done) {
         process.nextTick(function() {
-        	
+
             User.findOne({ 'oauthID' : profile.id }, function(err, user) {
 				if (err) {
 					return done(err);
 				}
-				
+
                 if (user) {
                     return done(null, user);
-                    
+
                 } else {
                     var newUser = new User();
 
@@ -83,49 +83,48 @@ module.exports = function (passport) {
                         if (err) {
 							throw err;
 						}
-						
+
                         return done(null, newUser);
                     });
             	}
         	});
 		});
 	}));
-    
+
     /****************************** GOOGLE ******************************/
-    
+
 	passport.use(new GoogleStrategy({
         clientID        : configAuth.google.clientID,
         clientSecret    : configAuth.google.clientSecret,
         callbackURL     : configAuth.google.callbackURL
     },
     function(token, refreshToken, profile, done) {
-    	
+
         process.nextTick(function() {
             User.findOne({ 'oauthID' : profile.id }, function(err, user) {
                 if (err) {
 					return done(err);
 				}
-				
+
                 if (user) {
                     return done(null, user);
-                    
+
                 } else {
                     var newUser = new User();
 
                     newUser.oauthID = profile.id;
                 	newUser.displayName = profile.displayName ;
-                	
+
                     newUser.save(function(err) {
                         if (err) {
 							throw err;
 						}
-						
+
                         return done(null, newUser);
                     });
                 }
             });
         });
-
     }));
-    
+
 };
