@@ -12,14 +12,18 @@ function PollHandler () {
                 if (err) { return next(err); }
 
                 var resultsObject = {};
+                var answersList = [];
                 for (var i=0; i<body.answers.length; i++) {
-                	var key = body.answers[i];
-                	resultsObject[key] = 0;
+                  if (body.answers[i]) {
+                    var ans = body.answers[i];
+                    resultsObject[ans] = 0;
+                    answersList.push(ans);
+                  }
                 }
 
                 var newPoll = new Polls({
                     question: body.question,
-                    answers: body.answers,
+                    answers: answersList,
                     resultsObject : resultsObject,
                     creator : user._id
                 });
