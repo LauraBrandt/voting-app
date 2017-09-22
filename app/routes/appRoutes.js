@@ -122,7 +122,7 @@ module.exports = function (app, passport) {
 							title: poll.question,
 							page: '',
 							poll: poll,
-							voted: voted
+							voted: false //voted - change back to voted once populated some polls
 						});
 				}, next);
 			}, next);
